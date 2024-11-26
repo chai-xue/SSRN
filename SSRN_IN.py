@@ -2,6 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.io as sio
+from cffi.backend_ctypes import xrange
 from keras.models import Sequential, Model
 from keras.layers import Convolution2D, MaxPooling2D, Conv3D, MaxPooling3D, ZeroPadding3D
 from keras.layers import Activation, Dropout, Flatten, Dense, BatchNormalization, Input
@@ -65,9 +66,9 @@ def res4_model_ss():
 
     return model_res4
 
-mat_data = sio.loadmat('/home/zilong/SSRN/datasets/IN/Indian_pines_corrected.mat')
+mat_data = sio.loadmat('D:/project/linshi_project/SSRN/datasets/IN/Indian_pines_corrected.mat')
 data_IN = mat_data['indian_pines_corrected']
-mat_gt = sio.loadmat('/home/zilong/SSRN/datasets/IN/Indian_pines_gt.mat')
+mat_gt = sio.loadmat('D:/project/linshi_project/SSRN/datasets/IN/Indian_pines_gt.mat')
 gt_IN = mat_gt['indian_pines_gt']
 print (data_IN.shape)
 

@@ -4,7 +4,6 @@ import time
 import keras.callbacks as kcallbacks
 import collections
 from sklearn import metrics
-import averageAccuracy
 
 def outputStats(KAPPA_AE, OA_AE, AA_AE, ELEMENT_ACC_AE, TRAINING_TIME_AE, TESTING_TIME_AE, history, loss_and_metrics, CATEGORY, path1, path2):
 

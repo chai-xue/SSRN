@@ -2,6 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.io as sio
+from cffi.backend_ctypes import xrange
 from keras.models import Sequential, Model
 from keras.layers import Convolution2D, MaxPooling2D, Conv3D, MaxPooling3D, ZeroPadding3D
 from keras.layers import Activation, Dropout, Flatten, Dense, BatchNormalization, Input
@@ -71,9 +72,9 @@ def res4_model_ss():
     return model_res4
 
 
-mat_data = sio.loadmat('/home/zilong/SSRN/datasets/IN/Indian_pines_corrected.mat')
+mat_data = sio.loadmat('D:/project/linshi_project/SSRN/datasets/IN/Indian_pines_corrected.mat')
 data_IN = mat_data['indian_pines_corrected']
-mat_gt = sio.loadmat('/home/zilong/SSRN/datasets/IN/Indian_pines_gt.mat')
+mat_gt = sio.loadmat('D:/project/linshi_project/SSRN/datasets/IN/Indian_pines_gt.mat')
 gt_IN = mat_gt['indian_pines_gt']
 print (data_IN.shape)
 
@@ -138,7 +139,7 @@ seeds = [1334]
 for index_iter in xrange(ITER):
     print("# %d Iteration" % (index_iter + 1))
 
-    best_weights_RES_path_ss4 = '/home/zilong/SSRN/models/Indian_best_RES_3D_SS4_10_' + str(
+    best_weights_RES_path_ss4 = 'D:/project/linshi_project/SSRN/models/Indian_best_RES_3D_SS4_10_' + str(
         index_iter + 1) + '.hdf5'
 
     np.random.seed(seeds[index_iter])
@@ -182,7 +183,8 @@ for index_iter in xrange(ITER):
     # SS Residual Network 4 with BN
     model_res4_SS_BN = res4_model_ss()
 
-    model_res4_SS_BN.load_weights(best_weights_RES_path_ss4)
+    model_res4_SS_BN.load_weights(best_weights_RES_path_ss4, by_name=True)
+
 
     pred_test_res4 = model_res4_SS_BN.predict(
         x_test.reshape(x_test.shape[0], x_test.shape[1], x_test.shape[2], x_test.shape[3], 1)).argmax(axis=1)
@@ -203,5 +205,5 @@ for index_iter in xrange(ITER):
     print("# %d Iteration" % (index_iter + 1))
 
 modelStatsRecord.outputStats_assess(KAPPA_RES_SS4, OA_RES_SS4, AA_RES_SS4, ELEMENT_ACC_RES_SS4, CATEGORY,
-                             '/home/zilong/SSRN/records/IN_test_SS_10.txt',
-                             '/home/zilong/SSRN/records/IN_test_SS_element_10.txt')
+                             'D:/project/linshi_project/SSRN/records/IN_test_SS_10.txt',
+                             'D:/project/linshi_project/SSRN/records/IN_test_SS_element_10.txt')

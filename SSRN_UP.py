@@ -2,6 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.io as sio
+from cffi.backend_ctypes import xrange
 from keras.models import Sequential, Model
 from keras.layers import Convolution2D, MaxPooling2D, Conv3D, MaxPooling3D, ZeroPadding3D
 from keras.layers import Activation, Dropout, Flatten, Dense, BatchNormalization, Input
@@ -65,8 +66,8 @@ def res4_model_ss():
 
     return model_res4
 
-uPavia = sio.loadmat('/home/zilong/SSRN/datasets/UP/PaviaU.mat')
-gt_uPavia = sio.loadmat('/home/zilong/SSRN/datasets/UP/PaviaU_gt.mat')
+uPavia = sio.loadmat('D:/project/linshi_project/SSRN/datasets/UP/PaviaU.mat')
+gt_uPavia = sio.loadmat('D:/project/linshi_project/SSRN/datasets/UP/PaviaU_gt.mat')
 data_IN = uPavia['paviaU']
 gt_IN = gt_uPavia['paviaU_gt']
 print (data_IN.shape)
@@ -127,8 +128,8 @@ seeds = [1334]
 
 for index_iter in xrange(ITER):
     print("# %d Iteration" % (index_iter + 1))
-    
-    best_weights_RES_path_ss4 = '/home/zilong/SSRN/models/UP_best_RES_3D_SS4_5_' +  str(index_iter+1) +'.hdf5'
+
+    best_weights_RES_path_ss4 = 'D:/project/linshi_project/SSRN/models/UP_best_RES_3D_SS4_5_' +  str(index_iter+1) +'.hdf5'
 
     np.random.seed(seeds[index_iter])
 #    train_indices, test_indices = sampleFixNum.samplingFixedNum(TRAIN_NUM, gt)
