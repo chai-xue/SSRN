@@ -183,14 +183,15 @@ for index_iter in xrange(ITER):
                                                 save_best_only=True,
                                                 mode='auto')
 
-    tic6 = time.clock()
+    tic6 = time.process_time()
     print(x_train.shape, x_test.shape)
     history_res4_SS_BN = model_res4_SS_BN.fit(
         x_train.reshape(x_train.shape[0], x_train.shape[1], x_train.shape[2], x_train.shape[3], 1), y_train,
         validation_data=(x_val.reshape(x_val.shape[0], x_val.shape[1], x_val.shape[2], x_val.shape[3], 1), y_val),
         batch_size=batch_size,
-        nb_epoch=nb_epoch, shuffle=True, callbacks=[earlyStopping6, saveBestModel6])
+        epochs=nb_epoch, shuffle=True, callbacks=[earlyStopping6, saveBestModel6])
     toc6 = time.clock()
+    # 我这里设置的 200次循环
 
     tic7 = time.clock()
     loss_and_metrics_res4_SS_BN = model_res4_SS_BN.evaluate(
